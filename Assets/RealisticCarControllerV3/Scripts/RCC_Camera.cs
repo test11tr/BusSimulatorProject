@@ -247,9 +247,13 @@ public class RCC_Camera : MonoBehaviour{
 		// Velocity of the vehicle.
 		playerVelocity = playerCar.transform.InverseTransformDirection(playerRigid.velocity);
 
-		// Lerping current field of view to target field of view.
-		thisCam.fieldOfView = Mathf.Lerp (thisCam.fieldOfView, targetFieldOfView, Time.deltaTime * 5f);
 
+
+
+		// Lerping current field of view to target field of view.
+	//	thisCam.fieldOfView = Mathf.Lerp (thisCam.fieldOfView, targetFieldOfView, Time.deltaTime * 5f);
+
+		thisCam.fieldOfView = targetFieldOfView;
 	}
 
 	void LateUpdate (){
@@ -575,7 +579,6 @@ public class RCC_Camera : MonoBehaviour{
 	}
 
 	private void ORBIT(){
-
 		// Clamping Y.
 		orbitY = Mathf.Clamp(orbitY, minOrbitY, maxOrbitY);
 

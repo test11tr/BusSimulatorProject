@@ -12,15 +12,60 @@ public class ManStateHandler : MonoBehaviour
     bool ll_isopen = false;
     bool blinkerAtLeft = false;
     bool blinkerAtRight = false;
+
+    [SerializeField]
+    private GameObject leftBlinkerLight;
+    [SerializeField]
+    private GameObject rightBlinkerLight;
+
+
+
+
+    private Material leftBlinkMat;
+
+    private Material rightBlinkMat;
     void Start()
     {
         anim = GetComponent<Animator>();
         sceneManager = FindObjectOfType<RCC_SceneManager>();
+        leftBlinkMat = leftBlinkerLight.GetComponent<Renderer>().material;
+        rightBlinkMat = rightBlinkerLight.GetComponent<Renderer>().material;
+
+
+
     }
 
+    IEnumerator LeftBlinkLight()
+    {
+        yield return new WaitForSeconds(0.3f);
+        while (blinkerAtLeft)
+        {
+            leftBlinkMat.EnableKeyword("_EMISSION");
+            yield return new WaitForSeconds(0.3f);
+            leftBlinkMat.DisableKeyword("_EMISSION");
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+    IEnumerator RightBlinkLight()
+    {
+        yield return new WaitForSeconds(0.3f);
+        while (blinkerAtRight)
+        {
+            rightBlinkMat.EnableKeyword("_EMISSION");
+            yield return new WaitForSeconds(0.3f);
+            rightBlinkMat.DisableKeyword("_EMISSION");
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+    private void DisableLight()
+    {
+
+    }
     void Update()
     {
+ //       Debug.Log(sceneManager.activePlayerVehicle.speed);
         //KapýKontrol & Motor Kontrol
+
         if (sceneManager.activePlayerVehicle.speed < 2)
         {
             //ON KAPI
@@ -43,15 +88,17 @@ public class ManStateHandler : MonoBehaviour
             {
                 LeftLuggageSwitch();
             }
-            
+
             //Hareket Kontrol
             CheckIfCanMove();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             BlinkerToLeft();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             BlinkerToRight();
         }
@@ -64,6 +111,7 @@ public class ManStateHandler : MonoBehaviour
         {
             fd_isopen = false;
             anim.SetBool("fd_open", false);
+
         }
         else
         {
@@ -124,9 +172,11 @@ public class ManStateHandler : MonoBehaviour
             blinkerAtRight = false;
             anim.SetBool("bl_left", true);
             anim.SetBool("bl_right", false);
+            StartCoroutine(LeftBlinkLight());
         }
         else
         {
+
             blinkerAtLeft = false;
             anim.SetBool("bl_left", false);
             anim.SetBool("bl_right", false);
@@ -140,6 +190,7 @@ public class ManStateHandler : MonoBehaviour
             blinkerAtLeft = false;
             anim.SetBool("bl_right", true);
             anim.SetBool("bl_left", false);
+            StartCoroutine(RightBlinkLight());
         }
         else
         {
