@@ -1044,11 +1044,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6461979033083849578, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
       propertyPath: m_Mode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6461979033083849578, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
       propertyPath: m_FarClip
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6461979033083849578, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
+      propertyPath: m_Importance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6461979033083849578, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
       propertyPath: m_Resolution
@@ -1112,7 +1116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6461979033833237114, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
       propertyPath: m_Intensity
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6461979033833237114, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
       propertyPath: m_Lightmapping
@@ -1157,7 +1161,7 @@ PrefabInstance:
     - target: {fileID: 6461979034074858845, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 11400000, guid: eb4f4cb90ede5244e9195ed65ef7230b, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b44864d24966b34fa5f3994ccd4a642, type: 3}
 --- !u!1 &1430425683 stripped
@@ -2692,6 +2696,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.0137864
       objectReference: {fileID: 0}
+    - target: {fileID: 797118813631095787, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
+      objectReference: {fileID: 0}
     - target: {fileID: 933195426866964498, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -2808,6 +2816,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2390964332148703882, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
+      objectReference: {fileID: 0}
     - target: {fileID: 2685040346144622321, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
       value: 37
@@ -2823,6 +2835,14 @@ PrefabInstance:
     - target: {fileID: 3134682243799365830, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328611442655721125, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3744783001327803841, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3964890646359696385, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
@@ -2936,6 +2956,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5330741992114768516, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
+      objectReference: {fileID: 0}
     - target: {fileID: 5603794978261500255, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_Controller
       value: 
@@ -2960,6 +2984,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5995736390337696033, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
+      objectReference: {fileID: 0}
     - target: {fileID: 6095189116204074371, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2971,6 +2999,10 @@ PrefabInstance:
     - target: {fileID: 6095189116204074371, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.22018409
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110171622433111165, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
       objectReference: {fileID: 0}
     - target: {fileID: 6144249938610738081, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
@@ -3092,6 +3124,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9c0643573598ebb4da90af2047b366d8, type: 2}
+    - target: {fileID: 7637918739026478710, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
+      objectReference: {fileID: 0}
     - target: {fileID: 7823002299036452175, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -3167,6 +3203,14 @@ PrefabInstance:
     - target: {fileID: 8583915215630778650, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -138.825
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725608867930860491, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821171693698690408, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorLight
       objectReference: {fileID: 0}
     - target: {fileID: 8887424189144843428, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder

@@ -286,7 +286,7 @@ MonoBehaviour:
   UIButtonSensitivity: 1
   UIButtonGravity: 2
   gyroSensitivity: 1.5
-  useLightsAsVertexLights: 1
+  useLightsAsVertexLights: 0
   useLightProjectorForLightingEffect: 0
   setTagsAndLayers: 1
   RCCLayer: RCC

@@ -269,6 +269,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
 	#region Head Lights
 	// Lights.
+	int lightMode = 0; //interior lights
 	public bool lowBeamHeadLightsOn = false;	// Low beam head lights.
 	public bool highBeamHeadLightsOn = false;	// High beam head lights.
 	#endregion
@@ -1085,12 +1086,42 @@ public class RCC_CarControllerV3 : RCC_Core {
 		case RCC_Settings.ControllerType.Keyboard:
 			
 			if(RCC_InputManager.GetKeyDown(RCCSettings.lowBeamHeadlightsKB))
-				lowBeamHeadLightsOn = !lowBeamHeadLightsOn;
-
+                {
+					if (lightMode == 0)
+                    {
+						lightMode = 1;
+                    }
+					else if (lightMode == 1)
+                    {
+						lowBeamHeadLightsOn = true;
+						lightMode = 2;
+					}
+					else if (lightMode == 2)
+                    {
+						lowBeamHeadLightsOn = false;
+						lightMode = 0;
+                    }
+					else if (lightMode == 3)
+					{
+						lowBeamHeadLightsOn = false;
+						highBeamHeadLightsOn = false;
+						lightMode = 0;
+					}
+				}
+				
 			if(RCC_InputManager.GetKeyDown(RCCSettings.highBeamHeadlightsKB))
-				highBeamHeadLightsOn = true;
-			else if(RCC_InputManager.GetKeyUp(RCCSettings.highBeamHeadlightsKB))
-				highBeamHeadLightsOn = false;
+                {
+					if (lightMode == 2)
+					{
+						highBeamHeadLightsOn = true;
+						lightMode = 3;
+					}
+					else if (lightMode == 3)
+					{
+						highBeamHeadLightsOn = false;
+						lightMode = 2;
+					}
+				}
 
 			if(RCC_InputManager.GetKeyDown(RCCSettings.startEngineKB))
 				KillOrStartEngine();

@@ -12,49 +12,85 @@ public class ManStateHandler : MonoBehaviour
     bool ll_isopen = false;
     bool blinkerAtLeft = false;
     bool blinkerAtRight = false;
+    int lightMode = 0;
 
-    [SerializeField]
-    private GameObject leftBlinkerLight;
-    [SerializeField]
-    private GameObject rightBlinkerLight;
-
-
+    [SerializeField] private GameObject leftBlinkerLight;
+    [SerializeField] private GameObject rightBlinkerLight;
+    [SerializeField] private GameObject dashboardP1;
+    [SerializeField] private GameObject dashboardP2;
+    [SerializeField] private GameObject dashboardP3;
+    [SerializeField] private GameObject dashboardP4;
+    [SerializeField] private GameObject int_arkakapi;
+    [SerializeField] private GameObject int_onkapi;
+    [SerializeField] private GameObject int_yakinfar;
+    [SerializeField] private GameObject int_uzakfar;
+    [SerializeField] private GameObject int_emniyet;
+    [SerializeField] private GameObject int_elfreni;
+    [SerializeField] private GameObject int_dortlulerbut;
+    [SerializeField] private GameObject int_dortluler_em;
+    [SerializeField] private GameObject int_benzinalarm;
+    [SerializeField] private GameObject int_motorarizasi;
 
 
     private Material leftBlinkMat;
-
     private Material rightBlinkMat;
+    private Material dashboardP1Mat;
+    private Material dashboardP2Mat;
+    private Material dashboardP3Mat;
+    private Material dashboardP4Mat;
+    private Material int_arkakapi_mat;
+    private Material int_onkapi_mat;
+    private Material int_yakinfar_mat;
+    private Material int_uzakfar_mat;
+    private Material int_emniyet_mat;
+    private Material int_elfreni_mat;
+    private Material int_dortlulerbut_mat;
+    private Material int_dortluler_em_mat;
+    private Material int_benzinalarm_mat;
+    private Material int_motorarizasi_mat;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         sceneManager = FindObjectOfType<RCC_SceneManager>();
         leftBlinkMat = leftBlinkerLight.GetComponent<Renderer>().material;
         rightBlinkMat = rightBlinkerLight.GetComponent<Renderer>().material;
-
-
-
+        dashboardP1Mat = dashboardP1.GetComponent<Renderer>().material;
+        dashboardP2Mat = dashboardP2.GetComponent<Renderer>().material;
+        dashboardP3Mat = dashboardP3.GetComponent<Renderer>().material;
+        dashboardP4Mat = dashboardP4.GetComponent<Renderer>().material;
+        int_arkakapi_mat = int_arkakapi.GetComponent<Renderer>().material;
+        int_onkapi_mat = int_onkapi.GetComponent<Renderer>().material;
+        int_yakinfar_mat = int_yakinfar.GetComponent<Renderer>().material;
+        int_uzakfar_mat = int_uzakfar.GetComponent<Renderer>().material;
+        int_emniyet_mat = int_emniyet.GetComponent<Renderer>().material;
+        int_elfreni_mat = int_elfreni.GetComponent<Renderer>().material;
+        int_dortlulerbut_mat = int_dortlulerbut.GetComponent<Renderer>().material;
+        int_dortluler_em_mat = int_dortluler_em.GetComponent<Renderer>().material;
+        int_benzinalarm_mat = int_benzinalarm.GetComponent<Renderer>().material;
+        int_motorarizasi_mat = int_motorarizasi.GetComponent<Renderer>().material;
     }
 
     IEnumerator LeftBlinkLight()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         while (blinkerAtLeft)
         {
             leftBlinkMat.EnableKeyword("_EMISSION");
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
             leftBlinkMat.DisableKeyword("_EMISSION");
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
     IEnumerator RightBlinkLight()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         while (blinkerAtRight)
         {
             rightBlinkMat.EnableKeyword("_EMISSION");
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
             rightBlinkMat.DisableKeyword("_EMISSION");
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
     private void DisableLight()
@@ -101,6 +137,18 @@ public class ManStateHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             BlinkerToRight();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LightSwitch();
+        }
+        if (sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
+        {
+            int_uzakfar_mat.EnableKeyword("_EMISSION");
+        }
+        else if(!sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
+        {
+            int_uzakfar_mat.DisableKeyword("_EMISSION");
         }
     }
 
@@ -199,9 +247,39 @@ public class ManStateHandler : MonoBehaviour
             anim.SetBool("bl_left", false);
         }
     }
+
+    public void LightSwitch()
+    {
+        if (lightMode == 0)
+        {
+            dashboardP1Mat.EnableKeyword("_EMISSION");
+            dashboardP2Mat.EnableKeyword("_EMISSION");
+            dashboardP3Mat.EnableKeyword("_EMISSION");
+            dashboardP4Mat.EnableKeyword("_EMISSION");
+            lightMode = 1;
+        }
+        else if (lightMode == 1)
+        {
+            dashboardP1Mat.EnableKeyword("_EMISSION");
+            dashboardP2Mat.EnableKeyword("_EMISSION");
+            dashboardP3Mat.EnableKeyword("_EMISSION");
+            dashboardP4Mat.EnableKeyword("_EMISSION");
+            int_yakinfar_mat.EnableKeyword("_EMISSION");
+            lightMode = 2;
+        }
+        else if (lightMode == 2)
+        {
+            dashboardP1Mat.DisableKeyword("_EMISSION");
+            dashboardP2Mat.DisableKeyword("_EMISSION");
+            dashboardP3Mat.DisableKeyword("_EMISSION");
+            dashboardP4Mat.DisableKeyword("_EMISSION");
+            int_yakinfar_mat.DisableKeyword("_EMISSION");
+            lightMode = 0;
+        }
+    }
     #endregion
 
-    public void CheckIfCanMove()
+        public void CheckIfCanMove()
     {
         if (fd_isopen || rd_isopen || rl_isopen || ll_isopen)
         {
