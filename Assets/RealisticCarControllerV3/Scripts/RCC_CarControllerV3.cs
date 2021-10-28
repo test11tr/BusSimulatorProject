@@ -1085,43 +1085,76 @@ public class RCC_CarControllerV3 : RCC_Core {
 
 		case RCC_Settings.ControllerType.Keyboard:
 			
-			if(RCC_InputManager.GetKeyDown(RCCSettings.lowBeamHeadlightsKB))
+			if (engineRunning)
                 {
-					if (lightMode == 0)
-                    {
-						lightMode = 1;
-                    }
-					else if (lightMode == 1)
-                    {
-						lowBeamHeadLightsOn = true;
-						lightMode = 2;
-					}
-					else if (lightMode == 2)
-                    {
-						lowBeamHeadLightsOn = false;
-						lightMode = 0;
-                    }
-					else if (lightMode == 3)
+					if (RCC_InputManager.GetKeyDown(RCCSettings.lowBeamHeadlightsKB))
 					{
-						lowBeamHeadLightsOn = false;
-						highBeamHeadLightsOn = false;
-						lightMode = 0;
+						if (lightMode == 0)
+						{
+							lightMode = 1;
+						}
+						else if (lightMode == 1)
+						{
+							lowBeamHeadLightsOn = true;
+							lightMode = 2;
+						}
+						else if (lightMode == 2)
+						{
+							lowBeamHeadLightsOn = false;
+							lightMode = 0;
+						}
+						else if (lightMode == 3)
+						{
+							lowBeamHeadLightsOn = false;
+							highBeamHeadLightsOn = false;
+							lightMode = 0;
+						}
+					}
+
+					if (RCC_InputManager.GetKeyDown(RCCSettings.highBeamHeadlightsKB))
+					{
+						if (lightMode == 2)
+						{
+							highBeamHeadLightsOn = true;
+							lightMode = 3;
+						}
+						else if (lightMode == 3)
+						{
+							highBeamHeadLightsOn = false;
+							lightMode = 2;
+						}
+					}
+
+					if (RCC_InputManager.GetKeyDown(RCCSettings.rightIndicatorKB))
+					{
+						if (indicatorsOn != IndicatorsOn.Right)
+							indicatorsOn = IndicatorsOn.Right;
+						else
+							indicatorsOn = IndicatorsOn.Off;
+					}
+
+					if (RCC_InputManager.GetKeyDown(RCCSettings.leftIndicatorKB))
+					{
+						if (indicatorsOn != IndicatorsOn.Left)
+							indicatorsOn = IndicatorsOn.Left;
+						else
+							indicatorsOn = IndicatorsOn.Off;
+					}
+
+					if (RCC_InputManager.GetKeyDown(RCCSettings.hazardIndicatorKB))
+					{
+						if (indicatorsOn != IndicatorsOn.All)
+						{
+							indicatorsOn = IndicatorsOn.Off;
+							indicatorsOn = IndicatorsOn.All;
+						}
+						else
+						{
+							indicatorsOn = IndicatorsOn.Off;
+						}
 					}
 				}
-				
-			if(RCC_InputManager.GetKeyDown(RCCSettings.highBeamHeadlightsKB))
-                {
-					if (lightMode == 2)
-					{
-						highBeamHeadLightsOn = true;
-						lightMode = 3;
-					}
-					else if (lightMode == 3)
-					{
-						highBeamHeadLightsOn = false;
-						lightMode = 2;
-					}
-				}
+			
 
 			if(RCC_InputManager.GetKeyDown(RCCSettings.startEngineKB))
 				KillOrStartEngine();
@@ -1132,28 +1165,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 			if (RCC_InputManager.GetKeyDown(RCCSettings.trailerAttachDetach))
 			DetachTrailer();
 
-			if(RCC_InputManager.GetKeyDown(RCCSettings.rightIndicatorKB)){
-				if(indicatorsOn != IndicatorsOn.Right)
-					indicatorsOn = IndicatorsOn.Right;
-				else
-					indicatorsOn = IndicatorsOn.Off;
-			}
-
-			if(RCC_InputManager.GetKeyDown(RCCSettings.leftIndicatorKB)){
-				if(indicatorsOn != IndicatorsOn.Left)
-					indicatorsOn = IndicatorsOn.Left;
-				else
-					indicatorsOn = IndicatorsOn.Off;
-			}
-
-			if(RCC_InputManager.GetKeyDown(RCCSettings.hazardIndicatorKB)){
-				if(indicatorsOn != IndicatorsOn.All){
-					indicatorsOn = IndicatorsOn.Off;
-					indicatorsOn = IndicatorsOn.All;
-				}else{
-					indicatorsOn = IndicatorsOn.Off;
-				}
-			}
+			
 
 			if (RCC_InputManager.GetKeyDown (RCCSettings.NGear))
 				NGear = true;

@@ -12,8 +12,14 @@ public class ManStateHandler : MonoBehaviour
     bool ll_isopen = false;
     bool blinkerAtLeft = false;
     bool blinkerAtRight = false;
+    bool hazardLightOn = false;
+    bool seatbeltOn = false;
     int lightMode = 0;
 
+    [SerializeField] private AudioClip brakeNdoorAudio;
+    [SerializeField] private AudioClip seatbeltOnAudio;
+    [SerializeField] private AudioClip seatbeltOffAudio;
+    [SerializeField] private AudioClip stickAudio;
     [SerializeField] private GameObject leftBlinkerLight;
     [SerializeField] private GameObject rightBlinkerLight;
     [SerializeField] private GameObject dashboardP1;
@@ -30,7 +36,9 @@ public class ManStateHandler : MonoBehaviour
     [SerializeField] private GameObject int_dortluler_em;
     [SerializeField] private GameObject int_benzinalarm;
     [SerializeField] private GameObject int_motorarizasi;
-
+    [SerializeField] private GameObject farlar;
+    [SerializeField] private GameObject farlar2;
+    [SerializeField] private GameObject farlar3;
 
     private Material leftBlinkMat;
     private Material rightBlinkMat;
@@ -48,6 +56,9 @@ public class ManStateHandler : MonoBehaviour
     private Material int_dortluler_em_mat;
     private Material int_benzinalarm_mat;
     private Material int_motorarizasi_mat;
+    private Material farlar_mat;
+    private Material farlar2_mat;
+    private Material farlar3_mat;
 
     void Start()
     {
@@ -69,6 +80,11 @@ public class ManStateHandler : MonoBehaviour
         int_dortluler_em_mat = int_dortluler_em.GetComponent<Renderer>().material;
         int_benzinalarm_mat = int_benzinalarm.GetComponent<Renderer>().material;
         int_motorarizasi_mat = int_motorarizasi.GetComponent<Renderer>().material;
+        farlar_mat = farlar.GetComponent<Renderer>().material;
+        farlar2_mat = farlar2.GetComponent<Renderer>().material;
+        farlar3_mat = farlar3.GetComponent<Renderer>().material;
+        //
+        int_emniyet_mat.EnableKeyword("_EMISSION");
     }
 
     IEnumerator LeftBlinkLight()
@@ -93,62 +109,104 @@ public class ManStateHandler : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
+    IEnumerator HazardLightBlink()
+    {
+        yield return new WaitForSeconds(0.2f);
+        while (hazardLightOn)
+        {
+            int_dortluler_em_mat.EnableKeyword("_EMISSION");
+            yield return new WaitForSeconds(0.5f);
+            int_dortluler_em_mat.DisableKeyword("_EMISSION");
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
     private void DisableLight()
     {
 
     }
     void Update()
     {
- //       Debug.Log(sceneManager.activePlayerVehicle.speed);
+        //Debug.Log(sceneManager.activePlayerVehicle.speed);
         //KapýKontrol & Motor Kontrol
-
-        if (sceneManager.activePlayerVehicle.speed < 2)
+        if (sceneManager.activePlayerVehicle.engineRunning)
         {
-            //ON KAPI
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            //BenzinAlarmý
+            if (sceneManager.activePlayerVehicle.fuelTank < 25)
+                int_benzinalarm_mat.EnableKeyword("_EMISSION");
+            else if (sceneManager.activePlayerVehicle.fuelTank > 25)
+                int_benzinalarm_mat.DisableKeyword("_EMISSION");
+
+            if (sceneManager.activePlayerVehicle.lowBeamHeadLightsOn)
             {
-                FrontDoorSwitch();
+                farlar_mat.EnableKeyword("_EMISSION");
+                farlar2_mat.EnableKeyword("_EMISSION");
+                farlar3_mat.EnableKeyword("_EMISSION");
             }
-            //ARKA KAPI
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (!sceneManager.activePlayerVehicle.lowBeamHeadLightsOn)
             {
-                RearDoorSwitch();
-            }
-            //SAG BAGAJLAR
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                RightLuggageSwitch();
-            }
-            //SOL BAGAJLAR
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                LeftLuggageSwitch();
+                farlar_mat.DisableKeyword("_EMISSION");
+                farlar2_mat.DisableKeyword("_EMISSION");
+                farlar3_mat.DisableKeyword("_EMISSION");
             }
 
-            //Hareket Kontrol
-            CheckIfCanMove();
-        }
+            if (sceneManager.activePlayerVehicle.speed < 2)
+            {
+                //ON KAPI
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    FrontDoorSwitch();
+                }
+                //ARKA KAPI
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    RearDoorSwitch();
+                }
+                //SAG BAGAJLAR
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    RightLuggageSwitch();
+                }
+                //SOL BAGAJLAR
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    LeftLuggageSwitch();
+                }
+
+                //Hareket Kontrol
+                CheckIfCanMove();
+            }
 
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            BlinkerToLeft();
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                BlinkerToLeft();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                BlinkerToRight();
+            }
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                HazardLightOn();
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                LightSwitch();
+            }
+
+            if (sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
+            {
+                int_uzakfar_mat.EnableKeyword("_EMISSION");
+            }
+            else if (!sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
+            {
+                int_uzakfar_mat.DisableKeyword("_EMISSION");
+            }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            BlinkerToRight();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LightSwitch();
-        }
-        if (sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
-        {
-            int_uzakfar_mat.EnableKeyword("_EMISSION");
-        }
-        else if(!sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
-        {
-            int_uzakfar_mat.DisableKeyword("_EMISSION");
+            SeatbeltSwitch();
         }
     }
 
@@ -159,12 +217,15 @@ public class ManStateHandler : MonoBehaviour
         {
             fd_isopen = false;
             anim.SetBool("fd_open", false);
-
+            int_onkapi_mat.DisableKeyword("_EMISSION");
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 1);
         }
         else
         {
             fd_isopen = true;
             anim.SetBool("fd_open", true);
+            int_onkapi_mat.EnableKeyword("_EMISSION");
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 1);
         }
     }
     public void RearDoorSwitch()
@@ -173,11 +234,15 @@ public class ManStateHandler : MonoBehaviour
         {
             rd_isopen = false;
             anim.SetBool("rd_open", false);
+            int_arkakapi_mat.DisableKeyword("_EMISSION");
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 1);
         }
         else
         {
             rd_isopen = true;
             anim.SetBool("rd_open", true);
+            int_arkakapi_mat.EnableKeyword("_EMISSION");
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 1);
         }
     }
     public void RightLuggageSwitch()
@@ -188,6 +253,8 @@ public class ManStateHandler : MonoBehaviour
             anim.SetBool("rl1_open", false);
             anim.SetBool("rl2_open", false);
             //anim.SetBool("rl3_open", false);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
         }
         else
         {
@@ -195,6 +262,8 @@ public class ManStateHandler : MonoBehaviour
             anim.SetBool("rl1_open", true);
             anim.SetBool("rl2_open", true);
             //anim.SetBool("rl3_open", true);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
         }
     }
     public void LeftLuggageSwitch()
@@ -204,12 +273,16 @@ public class ManStateHandler : MonoBehaviour
             ll_isopen = false;
             anim.SetBool("ll1_open", false);
             anim.SetBool("ll2_open", false);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
         }
         else
         {
             ll_isopen = true;
             anim.SetBool("ll1_open", true);
             anim.SetBool("ll2_open", true);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
+            AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 0.5f);
         }
     }
     public void BlinkerToLeft()
@@ -247,11 +320,41 @@ public class ManStateHandler : MonoBehaviour
             anim.SetBool("bl_left", false);
         }
     }
+    public void HazardLightOn()
+    {
+        if (!hazardLightOn)
+        {
+            hazardLightOn = true;
+            int_dortlulerbut_mat.EnableKeyword("_EMISSION");
+            StartCoroutine(HazardLightBlink());
+        }
+        else
+        {
+            hazardLightOn = false;
+            int_dortlulerbut_mat.DisableKeyword("_EMISSION");
+        }
+    }
+    public void SeatbeltSwitch()
+    {
+        if (!seatbeltOn)
+        {
+            seatbeltOn = true;
+            int_emniyet_mat.DisableKeyword("_EMISSION");
+            AudioSource.PlayClipAtPoint(seatbeltOnAudio, transform.position, 1);
+        }
+        else
+        {
+            seatbeltOn = false;
+            int_emniyet_mat.EnableKeyword("_EMISSION");
+            AudioSource.PlayClipAtPoint(seatbeltOffAudio, transform.position, 1);
+        }
+    }
 
     public void LightSwitch()
     {
         if (lightMode == 0)
         {
+            AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
             dashboardP1Mat.EnableKeyword("_EMISSION");
             dashboardP2Mat.EnableKeyword("_EMISSION");
             dashboardP3Mat.EnableKeyword("_EMISSION");
@@ -260,6 +363,7 @@ public class ManStateHandler : MonoBehaviour
         }
         else if (lightMode == 1)
         {
+            AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
             dashboardP1Mat.EnableKeyword("_EMISSION");
             dashboardP2Mat.EnableKeyword("_EMISSION");
             dashboardP3Mat.EnableKeyword("_EMISSION");
@@ -269,6 +373,7 @@ public class ManStateHandler : MonoBehaviour
         }
         else if (lightMode == 2)
         {
+            AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
             dashboardP1Mat.DisableKeyword("_EMISSION");
             dashboardP2Mat.DisableKeyword("_EMISSION");
             dashboardP3Mat.DisableKeyword("_EMISSION");
