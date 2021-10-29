@@ -1498,30 +1498,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34fa72bd4185749832024e9c8010bf, type: 3}
   m_Name: ScreenSpaceReflections
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   preset:
-    overrideState: 0
+    overrideState: 1
     value: 2
   maximumIterationCount:
-    overrideState: 0
+    overrideState: 1
     value: 16
   resolution:
-    overrideState: 0
+    overrideState: 1
     value: 0
   thickness:
-    overrideState: 0
+    overrideState: 1
     value: 8
   maximumMarchDistance:
-    overrideState: 0
+    overrideState: 1
     value: 100
   distanceFade:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
   vignette:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
 --- !u!114 &8298906498807184927
 MonoBehaviour:
