@@ -1022,10 +1022,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManLion
       objectReference: {fileID: 0}
-    - target: {fileID: 1407277706675348460, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
-      propertyPath: m_Mass
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 1407277706675348461, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
       value: 1

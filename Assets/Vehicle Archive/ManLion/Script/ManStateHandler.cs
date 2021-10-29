@@ -149,6 +149,11 @@ public class ManStateHandler : MonoBehaviour
                 farlar3_mat.DisableKeyword("_EMISSION");
             }
 
+            if (sceneManager.activePlayerVehicle.handbrakeInput == 1)
+                int_elfreni_mat.EnableKeyword("_EMISSION");
+            else if (sceneManager.activePlayerVehicle.handbrakeInput == 0)
+                int_elfreni_mat.DisableKeyword("_EMISSION");
+
             if (sceneManager.activePlayerVehicle.speed < 2)
             {
                 //ON KAPI
