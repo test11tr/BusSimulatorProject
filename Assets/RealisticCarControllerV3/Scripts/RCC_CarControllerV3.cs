@@ -974,14 +974,14 @@ public class RCC_CarControllerV3 : RCC_Core {
 		Inputs();
 
 		//Reversing Bool.
-		//if (!externalController){
+		if (!externalController){
 
-		//if(brakeInput > .9f  && transform.InverseTransformDirection(rigid.velocity).z < 1f && canGoReverseNow && automaticGear && !semiAutomaticGear && !changingGear && direction != -1)
-		//	StartCoroutine(ChangeGear(-1));
-		//else if (throttleInput < .1f && transform.InverseTransformDirection(rigid.velocity).z > -1f && direction == -1 && !changingGear && automaticGear && !semiAutomaticGear)
-		//	StartCoroutine(ChangeGear(0));
+		if(brakeInput > .9f  && transform.InverseTransformDirection(rigid.velocity).z < 1f && canGoReverseNow && automaticGear && !semiAutomaticGear && !changingGear && direction != -1)
+			StartCoroutine(ChangeGear(-1));
+		else if (throttleInput < .1f && transform.InverseTransformDirection(rigid.velocity).z > -1f && direction == -1 && !changingGear && automaticGear && !semiAutomaticGear)
+			StartCoroutine(ChangeGear(0));
 
-		//}
+		}
 		// BENZİN MİKTARI DEBUG
 		if (Input.GetKeyDown(KeyCode.Z))
 		{
