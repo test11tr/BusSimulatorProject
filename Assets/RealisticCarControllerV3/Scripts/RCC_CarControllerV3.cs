@@ -1008,7 +1008,8 @@ public class RCC_CarControllerV3 : RCC_Core {
 
 	private void Inputs() {
 
-		if (canControl) {
+		if (canControl) 
+		{
 
 			if (!externalController) {
 
@@ -1037,7 +1038,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 
 				steerInput = inputs.steerInput;
 				boostInput = inputs.boostInput;
-				handbrakeInput = inputs.handbrakeInput;
+	//			handbrakeInput = inputs.handbrakeInput;                   //BU KISMI KESTİM ONUN YERİNE GetExternalInputs() METHODUNA INPUT EKLEDİM.
 
 				if(!useAutomaticClutch)
 					clutchInput = inputs.clutchInput;
@@ -1110,6 +1111,21 @@ public class RCC_CarControllerV3 : RCC_Core {
 							lightMode = 0;
 						}
 					}
+
+					//BU KISMI BEN EKLEDİM NORMALDE inputs.handbrakeInput = handbrakeInput vardı update methodlarından birinde
+                    if (RCC_InputManager.GetKeyDown(RCCSettings.handbrakeKB))
+                    {
+						if(handbrakeInput == 0)
+                        {
+							handbrakeInput = 1;
+                        }
+                        else
+                        {
+							handbrakeInput = 0;
+                        }
+						
+                    }
+					//EKLEDİĞİM KISMIN SONU
 
 					if (RCC_InputManager.GetKeyDown(RCCSettings.highBeamHeadlightsKB))
 					{
