@@ -1053,7 +1053,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 			brakeInput = 0f;
 			steerInput = 0f;
 			boostInput = 0f;
-			handbrakeInput = 1f;
+			handbrakeInput = 0f;
 
 		}
 
