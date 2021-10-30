@@ -190,24 +190,24 @@ MonoBehaviour:
   topCameraAngle: {x: 45, y: 45, z: 0}
   maximumZDistanceOffset: 10
   topCameraDistance: 100
-  TPSDistance: 10.5
-  TPSHeight: 2
+  TPSDistance: 5
+  TPSHeight: 1
   TPSHeightDamping: 9.05
   TPSRotationDamping: 3
   TPSTiltMaximum: 15
   TPSTiltMultiplier: 2
   TPSYawAngle: 0
-  TPSPitchAngle: 5
+  TPSPitchAngle: -3
   TPSOffsetX: 0
-  TPSOffsetY: 0.5
+  TPSOffsetY: 0
   TPSAutoFocus: 1
   TPSAutoReverse: 1
   TPSCollision: 1
   TPSOffset: {x: 0, y: 0, z: 0.25}
   TPSStartRotation: {x: 0, y: 0, z: 0}
-  TPSMinimumFOV: 30
-  TPSMaximumFOV: 50
-  hoodCameraFOV: 60
+  TPSMinimumFOV: 40
+  TPSMaximumFOV: 60
+  hoodCameraFOV: 75
   wheelCameraFOV: 60
   minimumOrtSize: 7.5
   maximumOrtSize: 12.5

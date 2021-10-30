@@ -3135,11 +3135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1407277705824011396, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1407277705824011396, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 10000
+      value: 7500
       objectReference: {fileID: 0}
     - target: {fileID: 1407277705824011396, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.targetPosition
@@ -3156,6 +3156,10 @@ PrefabInstance:
     - target: {fileID: 1407277706675348458, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_Name
       value: ManLion
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407277706675348459, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: brakeTorque
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 1407277706675348461, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_RootOrder
@@ -3203,11 +3207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1407277707019851306, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.damper
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1407277707019851306, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.spring
-      value: 10000
+      value: 7500
       objectReference: {fileID: 0}
     - target: {fileID: 1407277707019851306, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.targetPosition
@@ -3457,6 +3461,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6421378825565208962, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_Name
+      value: InteriorCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 6448814792353192966, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_Range
       value: 1
@@ -3516,10 +3524,6 @@ PrefabInstance:
     - target: {fileID: 7974924427515497861, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8020874219487855520, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.36099994
       objectReference: {fileID: 0}
     - target: {fileID: 8444099806471407135, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_Range
@@ -3984,38 +3988,6 @@ PrefabInstance:
     - target: {fileID: 450100, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -1.651
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: TPSHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: TPSOffsetY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: cameraMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: TPSDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: useOcclusion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: TPSMaximumFOV
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: TPSMinimumFOV
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4708296831717676885, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
-      propertyPath: TPSPitchAngle
-      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6125987576029186395, guid: 9f32ea4a11500b344ae05427bdc21e05, type: 3}
       propertyPath: TPSOffsetY

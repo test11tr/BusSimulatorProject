@@ -278,7 +278,7 @@ public class RCC_Camera : MonoBehaviour{
 		case CameraMode.FPS:
 			FPS ();
 			if (useOrbitInHoodCameraMode)
-				ORBIT ();
+				ORBITFPS ();
 			break;
 
 		case CameraMode.WHEEL:
@@ -609,6 +609,49 @@ public class RCC_Camera : MonoBehaviour{
 		Mathf.Clamp (orbitResetTimer, 0f, 2f);
 
 		if (orbitReset && playerSpeed >= 25f && orbitResetTimer <= 0f) {
+
+			orbitX = 0f;
+			orbitY = 0f;
+
+		}
+
+	}
+	//X Ekseni sabitlenmiş Orbit Fonk.
+	private void ORBITFPS()
+	{
+		// Clamping Y.
+		orbitY = Mathf.Clamp(orbitY, minOrbitY, maxOrbitY);
+
+		/*if (orbitX < -360f)
+			orbitX += 360f;
+		if (orbitX > 360f)
+			orbitX -= 360f;*/
+
+		orbitRotation = Quaternion.Lerp(orbitRotation, Quaternion.Euler(20, orbitX, 0f), orbitSmooth * Time.deltaTime);
+
+		/*if (oldOrbitX != orbitX)
+		{
+
+			oldOrbitX = orbitX;
+			orbitResetTimer = 2f;
+
+		}*/
+
+		if (oldOrbitY != orbitY)
+		{
+
+			oldOrbitY = orbitY;
+			orbitResetTimer = 2f;
+
+		}
+
+		if (orbitResetTimer > 0)
+			orbitResetTimer -= Time.deltaTime;
+
+		Mathf.Clamp(orbitResetTimer, 0f, 2f);
+
+		if (orbitReset && playerSpeed >= 25f && orbitResetTimer <= 0f)
+		{
 
 			orbitX = 0f;
 			orbitY = 0f;
