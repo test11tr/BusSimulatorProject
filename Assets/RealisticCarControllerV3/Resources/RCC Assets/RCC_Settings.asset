@@ -276,7 +276,7 @@ MonoBehaviour:
   useAutomaticGear: 1
   useAutomaticClutch: 1
   runEngineAtAwake: 0
-  autoReverse: 1
+  autoReverse: 0
   autoReset: 1
   contactParticles: {fileID: 193332, guid: 863b5201aede3aa438ac7d962625d663, type: 3}
   units: 0
@@ -340,8 +340,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f772a702dcfbfe9478afe01aa9429fbc, type: 3}
   maxGearShiftingSoundVolume: 0.5
   maxCrashSoundVolume: 0.5
-  maxWindSoundVolume: 1
-  maxBrakeSoundVolume: 0.494
+  maxWindSoundVolume: 0.08
+  maxBrakeSoundVolume: 0.609
   foldGeneralSettings: 1
   foldBehaviorSettings: 1
   foldControllerSettings: 1

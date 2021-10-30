@@ -12,19 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c763223835deb4fba9bf832986512a, type: 3}
   m_Name: RCC_DemoVehicles
   m_EditorClassIdentifier: 
-  vehicles:
-  - {fileID: 8793704290723202973, guid: bf3ab31064a2dfd4e9169f8255974e38, type: 3}
-  - {fileID: 1500740795171085959, guid: 7b052d56259080f49a05078e1b9c93a4, type: 3}
-  - {fileID: 7746607682423773486, guid: 88fd2c2da25231247aa9be8cd36260c8, type: 3}
-  - {fileID: 904584182768392901, guid: e4d018f8c50a67245a468d25a2a52884, type: 3}
-  - {fileID: 2351731622233654470, guid: 0310f51b7f85c0748a78104a42b62cba, type: 3}
-  - {fileID: 7970101344553823556, guid: a50fa3717675b3843bf4b01dcf42eeb8, type: 3}
-  - {fileID: 5908081715534467786, guid: 002fc28edb8ca6748bf9f612846e88a1, type: 3}
-  - {fileID: 8246816625876468398, guid: 599c7d3618fac4343ac47df6ba96aa72, type: 3}
-  - {fileID: 6391051240174589729, guid: 80b1a61f83022be4498dada507ff2c2b, type: 3}
-  - {fileID: 7358101798263147283, guid: 640748c7dc05df6498d8e261a75812ab, type: 3}
-  - {fileID: 6597585763410560634, guid: 29609b28651d8c344b9a5ef01bbf8d87, type: 3}
-  - {fileID: 2064882725852913906, guid: f87edd5c01e348e4689be752a02f5824, type: 3}
-  - {fileID: 6300571433828332281, guid: c505a05675bb6d041a1bdbe1adba5409, type: 3}
-  - {fileID: 8766116397638068937, guid: 0d1a238a867f910418d05ebb363dcca3, type: 3}
-  - {fileID: 4577584250877147337, guid: 17bf2f0fb6d899d45abd362b6d1c4ffb, type: 3}
+  vehicles: []

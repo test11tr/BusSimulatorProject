@@ -10,7 +10,7 @@ Material:
   m_Name: Grey-ProtoPBR 1
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
-  m_LightmapFlags: 6
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -65,7 +65,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 0.796
-    - _Glossiness: 0.25
+    - _Glossiness: 0.516
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -79,5 +79,5 @@ Material:
     m_Colors:
     - _Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+    - _SpecColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
   m_BuildTextureStacks: []

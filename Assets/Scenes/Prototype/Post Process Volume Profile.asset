@@ -1432,7 +1432,7 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 1
+    value: 0
   shutterAngle:
     overrideState: 0
     value: 270
@@ -1504,7 +1504,7 @@ MonoBehaviour:
     value: 1
   preset:
     overrideState: 1
-    value: 2
+    value: 4
   maximumIterationCount:
     overrideState: 1
     value: 16

@@ -204,6 +204,8 @@ public class RCC_CarControllerV3 : RCC_Core {
 	// AudioSources and AudioClips.
 	private AudioSource engineStartSound;
 	public AudioClip engineStartClip;
+	private AudioSource engineStopSound;
+	public AudioClip engineStopClip;
 	internal AudioSource engineSoundHigh;
 	public AudioClip engineClipHigh;
 	private AudioSource engineSoundMed;
@@ -716,7 +718,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 	public void KillOrStartEngine (){
 		
 		if(engineRunning)
-			KillEngine ();
+			KillEngine();
 		else
 			StartEngine();
 
@@ -796,13 +798,34 @@ public class RCC_CarControllerV3 : RCC_Core {
 
 	}
 
+	public IEnumerator KillEngineDelayed()
+	{
+
+		if (engineRunning)
+		{
+
+			//engineStopSound = NewAudioSource(RCCSettings.audioMixer, gameObject, engineSoundPosition, "Engine Stop AudioSource", 1, 10, 1, engineStopClip, false, true, true);
+
+			//if (engineStopSound.isPlaying)
+			//	engineStopSound.Play();
+
+			yield return new WaitForSeconds(0.5f);
+
+			fuelInput = 0f;
+			engineRunning = false;
+
+		}
+
+		yield return new WaitForSeconds(1f);
+
+	}
+
 	/// <summary>
 	/// Kills the engine.
 	/// </summary>
 	public void KillEngine (){
 
-		fuelInput = 0f;
-		engineRunning = false;
+		StartCoroutine(KillEngineDelayed());
 
 	}
 
