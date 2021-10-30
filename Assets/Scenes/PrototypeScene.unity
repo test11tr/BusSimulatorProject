@@ -3141,6 +3141,10 @@ PrefabInstance:
       propertyPath: m_SuspensionSpring.spring
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 1407277705824011396, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_SuspensionSpring.targetPosition
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1407277706411599558, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.89
@@ -3204,6 +3208,10 @@ PrefabInstance:
     - target: {fileID: 1407277707019851306, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.spring
       value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407277707019851306, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
+      propertyPath: m_SuspensionSpring.targetPosition
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1407277707517716982, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: m_SuspensionSpring.damper
