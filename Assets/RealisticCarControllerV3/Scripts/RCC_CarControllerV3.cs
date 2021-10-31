@@ -675,7 +675,8 @@ public class RCC_CarControllerV3 : RCC_Core {
 	/// </summary>
 	private void InitDamage (){
 
-		if (deformableMeshFilters.Length == 0){
+		if (deformableMeshFilters.Length == 0)
+		{
 
 			MeshFilter[] allMeshFilters = GetComponentsInChildren<MeshFilter>();
 			List <MeshFilter> properMeshFilters = new List<MeshFilter>();
@@ -688,11 +689,8 @@ public class RCC_CarControllerV3 : RCC_Core {
 					properMeshFilters.Add(mf);
 
 			}
-
 			deformableMeshFilters = properMeshFilters.ToArray();
-
 		}
-
 		LoadOriginalMeshData();
 
 		// Particle System used for collision effects. Creating it at start. We will use this when we collide something.
@@ -707,7 +705,6 @@ public class RCC_CarControllerV3 : RCC_Core {
 			}
 
 		}
-
 		detachableParts = gameObject.GetComponentsInChildren<RCC_DetachablePart> ();
 
 	}
@@ -915,15 +912,21 @@ public class RCC_CarControllerV3 : RCC_Core {
 	private void DeformMesh(Mesh mesh, Vector3[] originalMesh, Collision collision, float cos, Transform meshTransform, Quaternion rot){
 		
 		Vector3[] vertices = mesh.vertices;
-		
+
+		Debug.Log(mesh);
+
+
+
 		foreach (ContactPoint contact in collision.contacts){
 			
 			Vector3 point = meshTransform.InverseTransformPoint(contact.point);
-			 
+
+
 			for (int i = 0; i < vertices.Length; i++){
 
 				if ((point - vertices[i]).magnitude < damageRadius){
-					vertices[i] += rot * ((localVector * (damageRadius - (point - vertices[i]).magnitude) / damageRadius) * cos + (new Vector3(Mathf.Sin(vertices[i].y * 1000), Mathf.Sin(vertices[i].z * 1000), Mathf.Sin(vertices[i].x * 100)).normalized * (randomizeVertices / 500f)));
+					vertices[i] += rot * ((localVector * (damageRadius - (point - vertices[i]).magnitude) / damageRadius) * cos +
+					(new Vector3(Mathf.Sin(vertices[i].y * 1000), Mathf.Sin(vertices[i].z * 1000), Mathf.Sin(vertices[i].x * 100)).normalized * (randomizeVertices / 500f)));
 					if (maximumDamage > 0 && ((vertices[i] - originalMesh[i]).magnitude) > maximumDamage){
 						vertices[i] = originalMesh[i] + (vertices[i] - originalMesh[i]).normalized * (maximumDamage);
 					}
@@ -936,7 +939,6 @@ public class RCC_CarControllerV3 : RCC_Core {
 		mesh.vertices = vertices;
 		mesh.RecalculateNormals();
 		mesh.RecalculateBounds();
-		
 	}
 
 	/// <summary>

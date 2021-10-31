@@ -46,7 +46,6 @@ public class RCC_AIWaypointsContainer : MonoBehaviour {
 							Gizmos.DrawLine(waypoints[i].transform.position, waypoints[i+1].transform.position); 
 						if(i < waypoints.Count - 2)
 							Gizmos.DrawLine(waypoints[waypoints.Count - 1].transform.position, waypoints[0].transform.position); 
-						
 					}
 
 				}
