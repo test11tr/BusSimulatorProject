@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -129,25 +129,25 @@ public class ManStateHandler : MonoBehaviour
     }
     void Update()
     {
-        //Debug.Log(sceneManager.activePlayerVehicle.speed);
-        //KapýKontrol & Motor Kontrol
+     //   Debug.Log(sceneManager.activePlayerVehicle.speed);
+        //KapÃ½Kontrol & Motor Kontrol
         if (sceneManager.activePlayerVehicle.engineRunning)
         {
             //TISS Sesi
             if (sceneManager.activePlayerVehicle.brakeInput == 1 && sceneManager.activePlayerVehicle.speed < 1 && !vehicleStopping)
             {
-                vehicleStopping = true; // Sesin ayný anda 100 kere oynamasý için.
+                vehicleStopping = true; // Sesin aynÃ½ anda 100 kere oynamasÃ½ iÃ§in.
                 AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 1.5f);
                 StartCoroutine(vehicleStoppingCouritine());
             }
 
-            //BenzinAlarmý
+            //BenzinAlarmÄ±
             if (sceneManager.activePlayerVehicle.fuelTank < 25)
                 int_benzinalarm_mat.EnableKeyword("_EMISSION");
             else if (sceneManager.activePlayerVehicle.fuelTank > 25)
                 int_benzinalarm_mat.DisableKeyword("_EMISSION");
             
-            //FAR Emissionlarý
+            //FAR EmissionlarÄ±
             if (sceneManager.activePlayerVehicle.lowBeamHeadLightsOn)
             {
                 farlar_mat.EnableKeyword("_EMISSION");
@@ -161,7 +161,7 @@ public class ManStateHandler : MonoBehaviour
                 farlar3_mat.DisableKeyword("_EMISSION");
             }
 
-            //El Freni Alarm Iþýðý
+            //El Freni Alarm IÃ¾Ã½Ã°Ã½
             if (sceneManager.activePlayerVehicle.handbrakeInput == 1)
                 int_elfreni_mat.EnableKeyword("_EMISSION");
             else if (sceneManager.activePlayerVehicle.handbrakeInput == 0)
@@ -221,7 +221,7 @@ public class ManStateHandler : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
             }
-            //Uzun Far Göstergesi
+            //Uzun Far GÃ¶stergesi
             if (sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
             {
                 int_uzakfar_mat.EnableKeyword("_EMISSION");
@@ -417,12 +417,12 @@ public class ManStateHandler : MonoBehaviour
         if (fd_isopen || rd_isopen || rl_isopen || ll_isopen)
         {
             sceneManager.activePlayerVehicle.canControl = false;
-            print("Hareket etmeden önce lütfen tüm kapýlarý kapayýnýz.");
+            print("Hareket etmeden Ã¶nce lÃ¼tfen tÃ¼m kapÃ½larÃ½ kapayÃ½nÃ½z.");
         }
         else
         {
             sceneManager.activePlayerVehicle.canControl = true;
-            //print("Þuan hareket edebilirsin.");
+            //print("Ãžuan hareket edebilirsin.");
         }
     }
 }
