@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,10 +41,6 @@ public class ManStateHandler : MonoBehaviour
     [SerializeField] private GameObject farlar;
     [SerializeField] private GameObject farlar2;
     [SerializeField] private GameObject farlar3;
-
-
-
-
 
     private Material leftBlinkMat;
     private Material rightBlinkMat;
@@ -133,25 +129,25 @@ public class ManStateHandler : MonoBehaviour
     }
     void Update()
     {
-     //   Debug.Log(sceneManager.activePlayerVehicle.speed);
-        //KapÃ½Kontrol & Motor Kontrol
+        //Debug.Log(sceneManager.activePlayerVehicle.speed);
+        //KapýKontrol & Motor Kontrol
         if (sceneManager.activePlayerVehicle.engineRunning)
         {
             //TISS Sesi
             if (sceneManager.activePlayerVehicle.brakeInput == 1 && sceneManager.activePlayerVehicle.speed < 1 && !vehicleStopping)
             {
-                vehicleStopping = true; // Sesin aynÃ½ anda 100 kere oynamasÃ½ iÃ§in.
+                vehicleStopping = true; // Sesin ayný anda 100 kere oynamasý için.
                 AudioSource.PlayClipAtPoint(brakeNdoorAudio, transform.position, 1.5f);
                 StartCoroutine(vehicleStoppingCouritine());
             }
 
-            //BenzinAlarmÄ±
+            //BenzinAlarmý
             if (sceneManager.activePlayerVehicle.fuelTank < 25)
                 int_benzinalarm_mat.EnableKeyword("_EMISSION");
             else if (sceneManager.activePlayerVehicle.fuelTank > 25)
                 int_benzinalarm_mat.DisableKeyword("_EMISSION");
             
-            //FAR EmissionlarÄ±
+            //FAR Emissionlarý
             if (sceneManager.activePlayerVehicle.lowBeamHeadLightsOn)
             {
                 farlar_mat.EnableKeyword("_EMISSION");
@@ -165,7 +161,7 @@ public class ManStateHandler : MonoBehaviour
                 farlar3_mat.DisableKeyword("_EMISSION");
             }
 
-            //El Freni Alarm IÃ¾Ã½Ã°Ã½
+            //El Freni Alarm Iþýðý
             if (sceneManager.activePlayerVehicle.handbrakeInput == 1)
                 int_elfreni_mat.EnableKeyword("_EMISSION");
             else if (sceneManager.activePlayerVehicle.handbrakeInput == 0)
@@ -225,7 +221,7 @@ public class ManStateHandler : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
             }
-            //Uzun Far GÃ¶stergesi
+            //Uzun Far Göstergesi
             if (sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
             {
                 int_uzakfar_mat.EnableKeyword("_EMISSION");
@@ -421,12 +417,12 @@ public class ManStateHandler : MonoBehaviour
         if (fd_isopen || rd_isopen || rl_isopen || ll_isopen)
         {
             sceneManager.activePlayerVehicle.canControl = false;
-            print("Hareket etmeden Ã¶nce lÃ¼tfen tÃ¼m kapÃ½larÃ½ kapayÃ½nÃ½z.");
+            print("Hareket etmeden önce lütfen tüm kapýlarý kapayýnýz.");
         }
         else
         {
             sceneManager.activePlayerVehicle.canControl = true;
-            //print("Ãžuan hareket edebilirsin.");
+            //print("Þuan hareket edebilirsin.");
         }
     }
 }
