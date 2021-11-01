@@ -10,7 +10,11 @@ public class ColliderDamage : MonoBehaviour
 
     [SerializeField] private int damagedPart; // 0 = front,1 = rear,2 = left,3 = right 
 
-    [SerializeField] private RCC_SceneManager sceneManager;
+    [SerializeField] public RCC_SceneManager sceneManager;
+    void Start()
+    {
+        sceneManager = FindObjectOfType<RCC_SceneManager>();
+    }
     private void OnTriggerEnter()
     {
         if(sceneManager.activePlayerVehicle.speed > 8)

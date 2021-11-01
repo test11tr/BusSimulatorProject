@@ -6518,7 +6518,7 @@ MonoBehaviour:
   engineRPM: 0
   engineInertia: 0.15
   useRevLimiter: 1
-  useExhaustFlame: 1
+  useExhaustFlame: 0
   engineRunning: 0
   useFuelConsumption: 1
   fuelTankCapacity: 100
