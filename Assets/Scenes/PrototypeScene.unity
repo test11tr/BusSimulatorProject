@@ -2709,6 +2709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "YolYard\u0131mCanvas"
       objectReference: {fileID: 0}
+    - target: {fileID: 3278559209775873892, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
 --- !u!1 &1123935058
