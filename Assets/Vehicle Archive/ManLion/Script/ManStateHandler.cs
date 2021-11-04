@@ -62,6 +62,13 @@ public class ManStateHandler : MonoBehaviour
     private Material farlar2_mat;
     private Material farlar3_mat;
 
+
+
+    #region Tire Health
+    public float tireMaxHealth = 100;
+    public float tireHealth = 100;
+    public float tireWearRate = 0.001f;
+    #endregion
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -87,6 +94,8 @@ public class ManStateHandler : MonoBehaviour
         farlar3_mat = farlar3.GetComponent<Renderer>().material;
         //
         int_emniyet_mat.EnableKeyword("_EMISSION");
+
+        tireHealth = PlayerPrefs.GetFloat("tireHealth");
     }
 
     IEnumerator LeftBlinkLight()
@@ -129,10 +138,16 @@ public class ManStateHandler : MonoBehaviour
     }
     void Update()
     {
+
      //   Debug.Log(sceneManager.activePlayerVehicle.speed);
         //KapýKontrol & Motor Kontrol
         if (sceneManager.activePlayerVehicle.engineRunning)
         {
+            if (sceneManager.activePlayerVehicle.speed > 5)
+            {
+                TireWear();
+            }
+
             //TISS Sesi
             if (sceneManager.activePlayerVehicle.brakeInput == 1 && sceneManager.activePlayerVehicle.speed < 1 && !vehicleStopping)
             {
@@ -422,7 +437,16 @@ public class ManStateHandler : MonoBehaviour
         else
         {
             sceneManager.activePlayerVehicle.canControl = true;
+
             //print("Þuan hareket edebilirsin.");
         }
+    }
+
+    private void TireWear()
+    {
+        tireHealth -= ((sceneManager.activePlayerVehicle.engineRPM / 10000f) * tireWearRate) * Time.fixedDeltaTime;
+        tireHealth = Mathf.Clamp(tireHealth, 0f, tireMaxHealth);
+        PlayerPrefs.SetFloat("tireHealth", tireHealth);
+
     }
 }

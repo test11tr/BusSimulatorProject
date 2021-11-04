@@ -208,7 +208,7 @@ public class ParkingManager: MonoBehaviour, IUnityAdsListener
 			if (t0 && t2 && t3 && t1 && tFront && tBack) {// If all of car triggers being entered in parking place
 				ParkRenderer.material.color = Color.green;
 				LightBeam.material.SetTexture("_MainTex", NewBeamTexture);
-				//Debug.Log("Park edildi, vitesi Park moduna alın.");
+				Debug.Log("Park edildi, vitesi Park moduna alın.");
 				if (!notNotification)
                 {
 					TooltipSystem.Show(carParkedContent, carParkedHeader);

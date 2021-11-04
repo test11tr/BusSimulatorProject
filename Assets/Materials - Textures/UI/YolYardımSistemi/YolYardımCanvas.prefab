@@ -3947,6 +3947,7 @@ GameObject:
   - component: {fileID: 2163417225988974083}
   - component: {fileID: 2163417225988974085}
   - component: {fileID: 2163417225988974084}
+  - component: {fileID: 1847152277511338568}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -4015,6 +4016,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1847152277511338568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163417225988974082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83d219b48340fc458290396e5461898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manStateHandler: {fileID: 0}
+  sceneManager: {fileID: 0}
+  totalDamage: {fileID: 0}
+  damageFilling: {fileID: 2163417226451776418}
+  tireFilling: {fileID: 0}
+  fuelFilling: {fileID: 0}
+  damagePercentageText: {fileID: 2163417226592034902}
+  tirePercentageText: {fileID: 2163417225773321708}
+  speedText: {fileID: 2163417225422205106}
 --- !u!1 &2163417226052503603
 GameObject:
   m_ObjectHideFlags: 0
@@ -4671,7 +4693,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.5
+  m_FillAmount: 0.547
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

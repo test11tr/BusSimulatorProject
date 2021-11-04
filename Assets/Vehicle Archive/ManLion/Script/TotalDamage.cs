@@ -12,8 +12,10 @@ public class TotalDamage : MonoBehaviour
     public float rightDamage { get; private set; }
     public float totalDamage { get; private set; }
 
-    [SerializeField] private float MaxTotalHealth;
-    [SerializeField] private float MaxPartialHealth;
+    public float MaxTotalHealth;
+    public float MaxPartialHealth;
+
+    [SerializeField] private YolYardimUI yolYardim;
 
 
     private void Start()
@@ -23,6 +25,7 @@ public class TotalDamage : MonoBehaviour
         leftDamage = PlayerPrefs.GetFloat("LeftDamage");
         rightDamage = PlayerPrefs.GetFloat("RightDamage");
         totalDamage = PlayerPrefs.GetFloat("TotalDamage");
+        yolYardim.SetDamageFilling();
     }
 
 
@@ -70,6 +73,7 @@ public class TotalDamage : MonoBehaviour
 
     private void IsCarBusted()
     {
+        yolYardim.SetDamageFilling();
         if(rightDamage > MaxPartialHealth || leftDamage > MaxPartialHealth || rearDamage > MaxPartialHealth || frontDamage > MaxPartialHealth || totalDamage > MaxTotalHealth)
         {
             Debug.Log("CAR IS BUSTED AND NEEDS REPAIR");

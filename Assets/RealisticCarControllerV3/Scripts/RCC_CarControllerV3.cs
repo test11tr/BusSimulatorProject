@@ -138,12 +138,14 @@ public class RCC_CarControllerV3 : RCC_Core {
 	public bool useFuelConsumption = false;		// Enable / Disable Fuel Consumption.
 	public float fuelTankCapacity = 62f;				// Fuel Tank Capacity.
 	public float fuelTank = 62f;							// Fuel Amount.
-	public float fuelConsumptionRate = .1f;		// Fuel Consumption Rate.
+	public float fuelConsumptionRate = .1f;     // Fuel Consumption Rate.
 	#endregion
 
-	#region Heat
-	// Engine heat.
-	public bool useEngineHeat = false;							// Enable / Disable engine heat.
+
+
+    #region Heat
+    // Engine heat.
+    public bool useEngineHeat = false;							// Enable / Disable engine heat.
 	public float engineHeat = 15f;									// Engine heat.
 	public float engineCoolingWaterThreshold = 60f;		// Engine coolign water engage point.
 	public float engineHeatRate = 1f;								// Engine heat multiplier.
@@ -454,7 +456,12 @@ public class RCC_CarControllerV3 : RCC_Core {
 			engineRunning = true;
 			fuelInput = 1f;
 
+			
 		}
+		
+		fuelTank = PlayerPrefs.GetFloat("fuelTank");
+
+
 
 	}
 
@@ -993,7 +1000,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 	}
 	
 	void Update (){
-
+		Debug.Log(fuelTank);
 		Inputs();
 
 		//Reversing Bool.
@@ -1009,6 +1016,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 		if (Input.GetKeyDown(KeyCode.Z))
 		{
 			print(fuelTank);
+
 		}
 
 		Audio();
@@ -2216,8 +2224,10 @@ public class RCC_CarControllerV3 : RCC_Core {
 
 		fuelTank -= ((engineRPM / 10000f) * fuelConsumptionRate) * Time.fixedDeltaTime;
 		fuelTank = Mathf.Clamp (fuelTank, 0f, fuelTankCapacity);
+		PlayerPrefs.SetFloat("fuelTank", fuelTank);
 
 	}
+
 
 	/// <summary>
 	/// Engine heat.
