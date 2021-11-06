@@ -18,6 +18,7 @@ public class YolYardimUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI damagePercentageText;
     [SerializeField] private TextMeshProUGUI tirePercentageText;
     [SerializeField] private TextMeshProUGUI speedText;
+    [SerializeField] private TextMeshProUGUI gearText;
 
     public void SetDamageFilling()
     {
@@ -37,12 +38,27 @@ public class YolYardimUI : MonoBehaviour
     {
         speedText.text = ((int)sceneManager.activePlayerVehicle.speed).ToString()+" KM/H";
     }
+    private void SetGearText()
+    {
+        if (sceneManager.activePlayerVehicle.speed >= 1 && sceneManager.activePlayerVehicle.direction == 1)
+            gearText.text = ((int)sceneManager.activePlayerVehicle.currentGear + 1).ToString();
+        else if (sceneManager.activePlayerVehicle.speed < 1 && sceneManager.activePlayerVehicle.direction == 1)
+            gearText.text = ((int)sceneManager.activePlayerVehicle.currentGear).ToString();
+        else if (sceneManager.activePlayerVehicle.direction == -1)
+            gearText.text = "R";
+    }
 
     private void Update()
     {
         SetFuelFilling();
         SetTireFilling();
         SetSpeedText();
+        SetGearText();
+    }
+
+    private void Start()
+    {
+        sceneManager = FindObjectOfType<RCC_SceneManager>();
     }
 
 }

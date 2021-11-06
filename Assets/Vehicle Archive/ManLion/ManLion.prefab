@@ -7256,6 +7256,7 @@ MonoBehaviour:
   damageMultiplier: 1.2
   MaxTotalHealth: 1000
   MaxPartialHealth: 300
+  yolYardim: {fileID: 0}
 --- !u!1 &1979599551424557926
 GameObject:
   m_ObjectHideFlags: 0
@@ -8811,6 +8812,9 @@ MonoBehaviour:
   farlar: {fileID: 8497860451594787430}
   farlar2: {fileID: 4593459304585200411}
   farlar3: {fileID: 2861666515862858162}
+  tireMaxHealth: 100
+  tireHealth: 100
+  tireWearRate: 0.01
 --- !u!1 &4172561138689618124
 GameObject:
   m_ObjectHideFlags: 0

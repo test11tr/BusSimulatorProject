@@ -799,6 +799,12 @@ public class RCC_CarControllerV3 : RCC_Core {
 			engineRunning = true;
 			fuelInput = 1f;
 
+			if (fuelTank < 0.5f)
+            {
+				StartCoroutine(KillEngineDelayed());
+				print("Yeterli yakıt yok!");
+			}
+
 		}
 
 		yield return new WaitForSeconds(1f);
@@ -1000,7 +1006,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 	}
 	
 	void Update (){
-		Debug.Log(fuelTank);
+		//Debug.Log(fuelTank);
 		Inputs();
 
 		//Reversing Bool.
@@ -1015,8 +1021,8 @@ public class RCC_CarControllerV3 : RCC_Core {
 		// BENZİN MİKTARI DEBUG
 		if (Input.GetKeyDown(KeyCode.Z))
 		{
-			print(fuelTank);
-
+			print("Yakıt Miktarı: " + fuelTank);
+			//print("direction:" + direction);
 		}
 
 		Audio();

@@ -4032,11 +4032,12 @@ MonoBehaviour:
   sceneManager: {fileID: 0}
   totalDamage: {fileID: 0}
   damageFilling: {fileID: 2163417226451776418}
-  tireFilling: {fileID: 0}
-  fuelFilling: {fileID: 0}
+  tireFilling: {fileID: 2163417227100663793}
+  fuelFilling: {fileID: 2163417226052503606}
   damagePercentageText: {fileID: 2163417226592034902}
   tirePercentageText: {fileID: 2163417225773321708}
   speedText: {fileID: 2163417225422205106}
+  gearText: {fileID: 2163417226356713606}
 --- !u!1 &2163417226052503603
 GameObject:
   m_ObjectHideFlags: 0

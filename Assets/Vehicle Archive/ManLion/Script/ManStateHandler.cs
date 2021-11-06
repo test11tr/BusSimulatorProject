@@ -15,7 +15,9 @@ public class ManStateHandler : MonoBehaviour
     bool hazardLightOn = false;
     bool seatbeltOn = false;
     bool vehicleStopping = false;
+    bool sinyalCheckbool = false;
     int lightMode = 0;
+
 
     [SerializeField] private AudioClip brakeNdoorAudio;
     [SerializeField] private AudioClip seatbeltOnAudio;
@@ -64,7 +66,8 @@ public class ManStateHandler : MonoBehaviour
 
 
 
-    #region Tire Health
+    #region Vehicle - Tire Health
+    public float totalDamage { get; private set; }
     public float tireMaxHealth = 100;
     public float tireHealth = 100;
     public float tireWearRate = 0.001f;
@@ -94,7 +97,7 @@ public class ManStateHandler : MonoBehaviour
         farlar3_mat = farlar3.GetComponent<Renderer>().material;
         //
         int_emniyet_mat.EnableKeyword("_EMISSION");
-
+        totalDamage = PlayerPrefs.GetFloat("TotalDamage");
         tireHealth = PlayerPrefs.GetFloat("tireHealth");
     }
 
@@ -136,18 +139,56 @@ public class ManStateHandler : MonoBehaviour
         yield return new WaitForSeconds(5f);
         vehicleStopping = false;
     }
+    IEnumerator SinyalCheckCouritine()
+    {
+        yield return new WaitForSeconds(1f);
+        while (blinkerAtLeft || blinkerAtRight)
+        {
+            if(sceneManager.activePlayerVehicle.steerInput == 0)
+            {
+                blinkerAtLeft = false;
+                blinkerAtRight = false;
+                anim.SetBool("bl_right", false);
+                anim.SetBool("bl_left", false);
+                sinyalCheckbool = false;
+            }
+        }
+    }
+
     void Update()
     {
-
-     //   Debug.Log(sceneManager.activePlayerVehicle.speed);
+        //Debug.Log(sceneManager.activePlayerVehicle.speed);
         //KapýKontrol & Motor Kontrol
         if (sceneManager.activePlayerVehicle.engineRunning)
         {
+            /*
+            //SinyalCheck 
+             print(sceneManager.activePlayerVehicle.steerInput);
+            if (blinkerAtLeft || blinkerAtRight)
+            {
+                if (!sinyalCheckbool)
+                {
+                    sinyalCheckbool = true;
+                    StartCoroutine(SinyalCheckCouritine());
+                }            
+            }
+            */
+
+            //Lastik Aşınması
             if (sceneManager.activePlayerVehicle.speed > 5)
             {
                 TireWear();
             }
 
+            //MotorSesi
+            if (totalDamage > 25)
+            {
+                int_motorarizasi_mat.EnableKeyword("_EMISSION");
+            }else if (totalDamage <25)
+            {
+                int_motorarizasi_mat.DisableKeyword("_EMISSION");
+            }
+            
             //TISS Sesi
             if (sceneManager.activePlayerVehicle.brakeInput == 1 && sceneManager.activePlayerVehicle.speed < 1 && !vehicleStopping)
             {
@@ -253,7 +294,7 @@ public class ManStateHandler : MonoBehaviour
         }
     }
 
-    #region DOOR LUGGAGE BLINKER SWITCH METHODS
+    #region SWITCH METHODS & FUNCTIONS
     public void FrontDoorSwitch()
     {
         if (fd_isopen)

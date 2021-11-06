@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: d83e5e98eabe7d14b8248910f83f31df, type: 3}
   m_Sun: {fileID: 1143171358}
-  m_IndirectSpecularColor: {r: 0.18154576, g: 0.22718869, b: 0.307407, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154615, g: 0.22718914, b: 0.30740726, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -528,17 +528,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e994fffe7d194c4b85351aaf19b0dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &93937561 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2163417225773321708, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
-  m_PrefabInstance: {fileID: 1091296823}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!850595691 &153244326
@@ -1681,17 +1670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83d219b48340fc458290396e5461898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &514389271 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2163417226052503606, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
-  m_PrefabInstance: {fileID: 1091296823}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f1c5417c9d7ab4b84e531f83f60a4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &538276853 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3549019153709521339, guid: f5bf9a09e0fb3174db2b21baed303d73, type: 3}
@@ -2677,29 +2655,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1847152277511338568, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
-      propertyPath: fuelFilling
-      value: 
-      objectReference: {fileID: 514389271}
-    - target: {fileID: 1847152277511338568, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
-      propertyPath: tireFilling
-      value: 
-      objectReference: {fileID: 1120649161}
-    - target: {fileID: 1847152277511338568, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
       propertyPath: totalDamage
       value: 
       objectReference: {fileID: 796149731}
     - target: {fileID: 1847152277511338568, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
-      propertyPath: sceneManager
-      value: 
-      objectReference: {fileID: 912582183}
-    - target: {fileID: 1847152277511338568, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
       propertyPath: manStateHandler
       value: 
       objectReference: {fileID: 714482769}
-    - target: {fileID: 1847152277511338568, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
-      propertyPath: tirePercentageText
-      value: 
-      objectReference: {fileID: 93937561}
     - target: {fileID: 2163417225457276065, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2798,17 +2760,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
---- !u!114 &1120649161 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2163417227100663793, guid: 3127892eec4e0924394a4dd7eef4f409, type: 3}
-  m_PrefabInstance: {fileID: 1091296823}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f1c5417c9d7ab4b84e531f83f60a4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1123935058
 GameObject:
   m_ObjectHideFlags: 0
