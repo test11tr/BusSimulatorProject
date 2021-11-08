@@ -15,7 +15,7 @@ public class ManStateHandler : MonoBehaviour
     bool hazardLightOn = false;
     bool seatbeltOn = false;
     bool vehicleStopping = false;
-    bool sinyalCheckbool = false;
+    bool wipersOn = false;
     int lightMode = 0;
 
 
@@ -24,6 +24,8 @@ public class ManStateHandler : MonoBehaviour
     [SerializeField] private AudioClip seatbeltOffAudio;
     [SerializeField] private AudioClip stickAudio;
     [SerializeField] private AudioClip engineOffSound;
+    [SerializeField] private AudioClip wiperSlowAudio;
+    [SerializeField] private AudioClip wiperFastAudio;
     [SerializeField] private GameObject leftBlinkerLight;
     [SerializeField] private GameObject rightBlinkerLight;
     [SerializeField] private GameObject dashboardP1;
@@ -139,18 +141,20 @@ public class ManStateHandler : MonoBehaviour
         yield return new WaitForSeconds(5f);
         vehicleStopping = false;
     }
-    IEnumerator SinyalCheckCouritine()
+    IEnumerator wiperSoundCouritine()
     {
-        yield return new WaitForSeconds(1f);
-        while (blinkerAtLeft || blinkerAtRight)
+        yield return new WaitForSeconds(0.1f);
+        while (wipersOn)
         {
-            if(sceneManager.activePlayerVehicle.steerInput == 0)
+            if (anim.GetInteger("wiperMode") == 1)
             {
-                blinkerAtLeft = false;
-                blinkerAtRight = false;
-                anim.SetBool("bl_right", false);
-                anim.SetBool("bl_left", false);
-                sinyalCheckbool = false;
+                AudioSource.PlayClipAtPoint(wiperSlowAudio, transform.position, 0.75f);
+                yield return new WaitForSeconds(3f);
+            }
+            else if (anim.GetInteger("wiperMode") == 2)
+            {
+                AudioSource.PlayClipAtPoint(wiperFastAudio, transform.position, 0.75f);
+                yield return new WaitForSeconds(1.5f);
             }
         }
     }
@@ -161,19 +165,6 @@ public class ManStateHandler : MonoBehaviour
         //KapýKontrol & Motor Kontrol
         if (sceneManager.activePlayerVehicle.engineRunning)
         {
-            /*
-            //SinyalCheck 
-             print(sceneManager.activePlayerVehicle.steerInput);
-            if (blinkerAtLeft || blinkerAtRight)
-            {
-                if (!sinyalCheckbool)
-                {
-                    sinyalCheckbool = true;
-                    StartCoroutine(SinyalCheckCouritine());
-                }            
-            }
-            */
-
             //Lastik Aşınması
             if (sceneManager.activePlayerVehicle.speed > 5)
             {
@@ -266,6 +257,10 @@ public class ManStateHandler : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.L))
             {
                 LightSwitch();
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                WiperSwitch();
             }
             //Motor Kapama Sesi
             if (Input.GetKeyDown(KeyCode.I))
@@ -436,7 +431,7 @@ public class ManStateHandler : MonoBehaviour
 
     public void LightSwitch()
     {
-        if (lightMode == 0)
+        if ( lightMode== 0)
         {
             AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
             dashboardP1Mat.EnableKeyword("_EMISSION");
@@ -466,9 +461,33 @@ public class ManStateHandler : MonoBehaviour
             lightMode = 0;
         }
     }
+
+    public void WiperSwitch()
+    {
+        if (anim.GetInteger("wiperMode") == 0)
+        {
+            wipersOn = true;
+            AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
+            anim.SetInteger("wiperMode", 1);
+            StartCoroutine(wiperSoundCouritine());
+        }
+        else if (anim.GetInteger("wiperMode") == 1)
+        {
+            wipersOn = true;
+            AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
+            anim.SetInteger("wiperMode", 2);
+        }
+        else if (anim.GetInteger("wiperMode") == 2)
+        {
+            wipersOn = false;
+            AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
+            StopCoroutine(wiperSoundCouritine());
+            anim.SetInteger("wiperMode", 0);
+        }
+    }
     #endregion
 
-        public void CheckIfCanMove()
+    public void CheckIfCanMove()
     {
         if (fd_isopen || rd_isopen || rl_isopen || ll_isopen)
         {

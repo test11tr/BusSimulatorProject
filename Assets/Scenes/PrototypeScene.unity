@@ -3421,10 +3421,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1364839558}
     - target: {fileID: 328089251549049126, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
-      propertyPath: tireWearRate
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 328089251549049126, guid: d5891395dc1963347b467562a7b3fcbf, type: 3}
       propertyPath: seatbeltAudio
       value: 
       objectReference: {fileID: 8300000, guid: d68aab7926b219646ac5a73c359aeccc, type: 3}
