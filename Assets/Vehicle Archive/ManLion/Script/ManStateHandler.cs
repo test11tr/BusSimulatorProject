@@ -68,6 +68,8 @@ public class ManStateHandler : MonoBehaviour
 
 
 
+    private float randomMalfunctionNumber = 22.5f;
+
     #region Vehicle - Tire Health
     public float totalDamage { get; private set; }
     public float tireMaxHealth = 100;
@@ -101,6 +103,7 @@ public class ManStateHandler : MonoBehaviour
         int_emniyet_mat.EnableKeyword("_EMISSION");
         totalDamage = PlayerPrefs.GetFloat("TotalDamage");
         tireHealth = PlayerPrefs.GetFloat("tireHealth");
+        StartCoroutine(EngineMalfunction());
     }
 
     IEnumerator LeftBlinkLight()
@@ -508,5 +511,24 @@ public class ManStateHandler : MonoBehaviour
         tireHealth = Mathf.Clamp(tireHealth, 0f, tireMaxHealth);
         PlayerPrefs.SetFloat("tireHealth", tireHealth);
 
+        sceneManager.activePlayerVehicle.tireWearSteer = tireHealth / 4;
+
+    }
+
+    IEnumerator EngineMalfunction()
+    {
+        randomMalfunctionNumber = totalDamage/25;
+        Debug.Log(randomMalfunctionNumber);
+        float temp = Random.Range(0, randomMalfunctionNumber);
+        if (temp > 19)
+        {
+            Debug.Log("ARIZA");
+        }
+        else
+        {
+            Debug.Log("MOTOR TESTİ GEÇTİ");
+        }
+        yield return new WaitForSeconds(1);
+        StartCoroutine(EngineMalfunction());
     }
 }

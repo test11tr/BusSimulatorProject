@@ -109,7 +109,9 @@ public class RCC_CarControllerV3 : RCC_Core {
 	public float speed = 0f;													// Vehicle speed.
 	public float maxspeed = 240f;											// Maximum speed.
 	private float resetTime = 0f;											// Used for resetting the vehicle if upside down.
-	private float orgSteerAngle = 0f;										// Original steer angle.
+	private float orgSteerAngle = 0f;                                       // Original steer angle.
+
+	public float tireWearSteer = 0;
 	#endregion
 
 	#region Engine
@@ -395,6 +397,8 @@ public class RCC_CarControllerV3 : RCC_Core {
     #endregion
 
     public RCC_TruckTrailer attachedTrailer;
+
+
 
     void Awake (){
 		
@@ -1008,7 +1012,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 	void Update (){
 		//Debug.Log(fuelTank);
 		Inputs();
-
+//		Debug.Log("speed = "+speed+" tire wear  = "+tireWearSteer +" current steer = "+ ((speed + tireWearSteer) / highspeedsteerAngleAtspeed));
 		//Reversing Bool.
 		if (!externalController){
 
@@ -1520,7 +1524,7 @@ public class RCC_CarControllerV3 : RCC_Core {
 		speed = rigid.velocity.magnitude * 3.6f;
 
 		//Steer Limit.
-		steerAngle = Mathf.Lerp(orgSteerAngle, highspeedsteerAngle, (speed / highspeedsteerAngleAtspeed));
+		steerAngle = Mathf.Lerp(orgSteerAngle, highspeedsteerAngle, ((speed + tireWearSteer) / highspeedsteerAngleAtspeed));
 
 		float wheelRPM = 0;
 

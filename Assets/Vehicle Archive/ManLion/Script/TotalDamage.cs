@@ -72,7 +72,7 @@ public class TotalDamage : MonoBehaviour
     }
 
     private void IsCarBusted()
-    {
+    {   
         yolYardim.SetDamageFilling();
         if(rightDamage > MaxPartialHealth || leftDamage > MaxPartialHealth || rearDamage > MaxPartialHealth || frontDamage > MaxPartialHealth || totalDamage > MaxTotalHealth)
         {
