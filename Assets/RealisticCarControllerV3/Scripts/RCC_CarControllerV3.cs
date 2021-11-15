@@ -1121,6 +1121,8 @@ public class RCC_CarControllerV3 : RCC_Core {
 	/// <summary>
 	/// Inputs this instance.
 	/// </summary>
+	/// 
+
 	private void GetExternalInputs(){
 		
 		switch(RCCSettings.selectedControllerType){
@@ -2465,7 +2467,6 @@ public class RCC_CarControllerV3 : RCC_Core {
 			StartEngine ();
 		else
 			KillEngine ();
-
 	}
 
 	void OnDisable(){

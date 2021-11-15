@@ -17,7 +17,8 @@ public class ManStateHandler : MonoBehaviour
     bool vehicleStopping = false;
     bool wipersOn = false;
     int lightMode = 0;
-
+    bool engineFailed = false;
+    bool engineChecksStarted = false;
 
     [SerializeField] private AudioClip brakeNdoorAudio;
     [SerializeField] private AudioClip seatbeltOnAudio;
@@ -103,7 +104,7 @@ public class ManStateHandler : MonoBehaviour
         int_emniyet_mat.EnableKeyword("_EMISSION");
         totalDamage = PlayerPrefs.GetFloat("TotalDamage");
         tireHealth = PlayerPrefs.GetFloat("tireHealth");
-        StartCoroutine(EngineMalfunction());
+        
     }
 
     IEnumerator LeftBlinkLight()
@@ -162,6 +163,33 @@ public class ManStateHandler : MonoBehaviour
         }
     }
 
+    IEnumerator EngineMalfunction()
+    {
+        yield return new WaitForSeconds(2f);
+        while (engineChecksStarted)
+        {
+            randomMalfunctionNumber = totalDamage / 25;
+            float temp = Random.Range(0, randomMalfunctionNumber);
+            //print(randomMalfunctionNumber);
+            print("Temp:" + temp);
+            if (temp > 19)
+            {
+                print("ARIZA");
+                if (!engineFailed)
+                {
+                    engineFailed = true;
+                    ShutDownEverything();
+                }
+            }
+            else
+            {
+                print("MOTOR TESTİ GEÇTİ");
+            }
+            yield return new WaitForSeconds(2f);
+            //StartCoroutine(EngineMalfunction());
+        }
+    }
+
     void Update()
     {
         //Debug.Log(sceneManager.activePlayerVehicle.speed);
@@ -174,12 +202,22 @@ public class ManStateHandler : MonoBehaviour
                 TireWear();
             }
 
-            //MotorSesi
+            //MotorHasarı
             if (totalDamage > 25)
             {
+                //EngineCheck
+                if (!engineChecksStarted)
+                {
+                    engineChecksStarted = true;
+                    StartCoroutine(EngineMalfunction());
+                }
                 int_motorarizasi_mat.EnableKeyword("_EMISSION");
             }else if (totalDamage <25)
             {
+                if(engineChecksStarted)
+                {
+                    engineChecksStarted = false;
+                }
                 int_motorarizasi_mat.DisableKeyword("_EMISSION");
             }
             
@@ -283,6 +321,13 @@ public class ManStateHandler : MonoBehaviour
             else if (!sceneManager.activePlayerVehicle.highBeamHeadLightsOn)
             {
                 int_uzakfar_mat.DisableKeyword("_EMISSION");
+            }
+        }else if(!sceneManager.activePlayerVehicle.engineRunning && engineFailed)
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                engineFailed = false;
+                sceneManager.activePlayerVehicle.handbrakeInput = 0;
             }
         }
 
@@ -515,20 +560,33 @@ public class ManStateHandler : MonoBehaviour
 
     }
 
-    IEnumerator EngineMalfunction()
+    private void ShutDownEverything()
     {
-        randomMalfunctionNumber = totalDamage/25;
-        Debug.Log(randomMalfunctionNumber);
-        float temp = Random.Range(0, randomMalfunctionNumber);
-        if (temp > 19)
-        {
-            Debug.Log("ARIZA");
-        }
-        else
-        {
-            Debug.Log("MOTOR TESTİ GEÇTİ");
-        }
-        yield return new WaitForSeconds(1);
-        StartCoroutine(EngineMalfunction());
+        //OffEngine
+        AudioSource.PlayClipAtPoint(engineOffSound, transform.position, 1);
+        RCC.SetEngine(sceneManager.activePlayerVehicle, false);
+        sceneManager.activePlayerVehicle.handbrakeInput = 1;
+        //OffEverything
+        dashboardP1Mat.DisableKeyword("_EMISSION");
+        dashboardP2Mat.DisableKeyword("_EMISSION");
+        dashboardP3Mat.DisableKeyword("_EMISSION");
+        dashboardP4Mat.DisableKeyword("_EMISSION");
+        int_yakinfar_mat.DisableKeyword("_EMISSION");
+        int_uzakfar_mat.DisableKeyword("_EMISSION");
+        lightMode = 0;
+        wipersOn = false;
+        anim.SetInteger("wiperMode", 0); //Silecekleri Kapama Çalışmıyor
+        hazardLightOn = false;
+        int_dortlulerbut_mat.DisableKeyword("_EMISSION");
+        anim.SetBool("bl_left", false);
+        anim.SetBool("bl_right", false);
+        blinkerAtLeft = false;
+        blinkerAtRight = false;
+        int_benzinalarm_mat.DisableKeyword("_EMISSION");
+        sceneManager.activePlayerVehicle.lowBeamHeadLightsOn = false;
+        sceneManager.activePlayerVehicle.highBeamHeadLightsOn = false;
+        sceneManager.activePlayerVehicle.indicatorsOn = RCC_CarControllerV3.IndicatorsOn.Off;
+        engineChecksStarted = false;
+        StopCoroutine(wiperSoundCouritine());
     }
 }
