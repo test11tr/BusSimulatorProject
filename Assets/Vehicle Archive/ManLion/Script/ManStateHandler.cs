@@ -77,8 +77,39 @@ public class ManStateHandler : MonoBehaviour
     public float tireHealth = 100;
     public float tireWearRate = 0.001f;
     #endregion
+
+
+
+    IEnumerator Corou()
+    {
+        yield return new WaitForSeconds(2);
+        GameEvents.current.AccidentNotification();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.EngineMalfunctionNotification();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.HeadlightNotification();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.AccidentDismiss();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.RedLightNotification();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.HeadlightDismiss();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.LaneNotification();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.LaneDismiss();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.SpeedLimitNotification();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.TireLifeNotification();
+        yield return new WaitForSeconds(2);
+        GameEvents.current.TireLifeDismiss();
+    }
+
     void Start()
     {
+        StartCoroutine(Corou());
+
         anim = GetComponent<Animator>();
         sceneManager = FindObjectOfType<RCC_SceneManager>();
         leftBlinkMat = leftBlinkerLight.GetComponent<Renderer>().material;
@@ -106,7 +137,10 @@ public class ManStateHandler : MonoBehaviour
         tireHealth = PlayerPrefs.GetFloat("tireHealth");
         
     }
-
+    private void onEngineMalfunction()
+    {
+        Debug.Log("ENGINE MALFUNCTION EVENT IS CALLED");
+    }
     IEnumerator LeftBlinkLight()
     {
         yield return new WaitForSeconds(0.2f);

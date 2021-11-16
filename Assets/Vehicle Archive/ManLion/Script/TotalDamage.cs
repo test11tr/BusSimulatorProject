@@ -34,6 +34,8 @@ public class TotalDamage : MonoBehaviour
         frontDamage += addedDamage;
         totalDamage += addedDamage;
 
+
+        GameEvents.current.EngineMalfunctionNotification();
         Debug.Log("FRONT DAMAGE IS = " + frontDamage + " AND TOTAL DAMAGE IS = " + totalDamage);
 
         PlayerPrefs.SetFloat("FrontDamage",frontDamage);
