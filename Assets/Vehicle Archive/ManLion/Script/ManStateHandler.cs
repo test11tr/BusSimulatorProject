@@ -82,28 +82,29 @@ public class ManStateHandler : MonoBehaviour
 
     IEnumerator Corou()
     {
-        yield return new WaitForSeconds(2);
-        GameEvents.current.AccidentNotification();
-        yield return new WaitForSeconds(2);
+        float time = 0.5f;
+
+        yield return new WaitForSeconds(time);
         GameEvents.current.EngineMalfunctionNotification();
-        yield return new WaitForSeconds(2);
-        GameEvents.current.HeadlightNotification();
-        yield return new WaitForSeconds(2);
-        GameEvents.current.AccidentDismiss();
-        yield return new WaitForSeconds(2);
-        GameEvents.current.RedLightNotification();
-        yield return new WaitForSeconds(2);
-        GameEvents.current.HeadlightDismiss();
-        yield return new WaitForSeconds(2);
-        GameEvents.current.LaneNotification();
-        yield return new WaitForSeconds(2);
-        GameEvents.current.LaneDismiss();
-        yield return new WaitForSeconds(2);
-        GameEvents.current.SpeedLimitNotification();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
         GameEvents.current.TireLifeNotification();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
+        GameEvents.current.LaneNotification();
+        yield return new WaitForSeconds(time);
+        GameEvents.current.HeadlightNotification();
+        yield return new WaitForSeconds(time);
+        GameEvents.current.SpeedLimitNotification();
+        yield return new WaitForSeconds(time);
+        GameEvents.current.EngineMalDismiss();
+        yield return new WaitForSeconds(time);
+        GameEvents.current.HeadlightDismiss();
+        yield return new WaitForSeconds(time);
+        GameEvents.current.TireLifeNotification();
+        yield return new WaitForSeconds(time);
+        GameEvents.current.EngineMalDismiss();
+        yield return new WaitForSeconds(time);
         GameEvents.current.TireLifeDismiss();
+
     }
 
     void Start()
@@ -135,7 +136,7 @@ public class ManStateHandler : MonoBehaviour
         int_emniyet_mat.EnableKeyword("_EMISSION");
         totalDamage = PlayerPrefs.GetFloat("TotalDamage");
         tireHealth = PlayerPrefs.GetFloat("tireHealth");
-        
+
     }
     private void onEngineMalfunction()
     {
@@ -246,15 +247,16 @@ public class ManStateHandler : MonoBehaviour
                     StartCoroutine(EngineMalfunction());
                 }
                 int_motorarizasi_mat.EnableKeyword("_EMISSION");
-            }else if (totalDamage <25)
+            }
+            else if (totalDamage < 25)
             {
-                if(engineChecksStarted)
+                if (engineChecksStarted)
                 {
                     engineChecksStarted = false;
                 }
                 int_motorarizasi_mat.DisableKeyword("_EMISSION");
             }
-            
+
             //TISS Sesi
             if (sceneManager.activePlayerVehicle.brakeInput == 1 && sceneManager.activePlayerVehicle.speed < 1 && !vehicleStopping)
             {
@@ -268,7 +270,7 @@ public class ManStateHandler : MonoBehaviour
                 int_benzinalarm_mat.EnableKeyword("_EMISSION");
             else if (sceneManager.activePlayerVehicle.fuelTank > 25)
                 int_benzinalarm_mat.DisableKeyword("_EMISSION");
-            
+
             //FAR Emissionları
             if (sceneManager.activePlayerVehicle.lowBeamHeadLightsOn)
             {
@@ -356,7 +358,8 @@ public class ManStateHandler : MonoBehaviour
             {
                 int_uzakfar_mat.DisableKeyword("_EMISSION");
             }
-        }else if(!sceneManager.activePlayerVehicle.engineRunning && engineFailed)
+        }
+        else if (!sceneManager.activePlayerVehicle.engineRunning && engineFailed)
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -513,7 +516,7 @@ public class ManStateHandler : MonoBehaviour
 
     public void LightSwitch()
     {
-        if ( lightMode== 0)
+        if (lightMode == 0)
         {
             AudioSource.PlayClipAtPoint(stickAudio, transform.position, 0.75f);
             dashboardP1Mat.EnableKeyword("_EMISSION");

@@ -7,13 +7,16 @@ public class Notifications : MonoBehaviour
     [SerializeField] private GameObject[] notification;
 
     [SerializeField] private float gapBetweenNotifications;
+
     private int notificationNumber = 0;
 
 
     private int[] notiNumberInPlace = new int[7];
+    private bool[] notiIsActive = new bool[7];
 
     [SerializeField] private int showPosX;
     [SerializeField] private int dismissPosX;
+
 
     private void Start()
     {
@@ -34,112 +37,126 @@ public class Notifications : MonoBehaviour
         GameEvents.current.onTireLifeDismiss += TireLifeDismiss;
     }
 
-    private void AccidentNotification()
+    private void NotificationActivate(int notiIndex)
     {
-        LeanTween.moveY(notification[0].GetComponent<RectTransform>(), (gapBetweenNotifications*notificationNumber), 0f);
-        notiNumberInPlace[0] = notificationNumber;
-        notificationNumber++;
-        LeanTween.moveX(notification[0].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
-    }
-    private void AccidentDismiss()
-    {
-        notificationNumber--;
-        RepositionNotifications(notiNumberInPlace[0]);
-        LeanTween.moveX(notification[0].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
-    }
-    private void EngineMalfunctionNotification()
-    {
-        LeanTween.moveY(notification[1].GetComponent<RectTransform>(), (gapBetweenNotifications * notificationNumber), 0f);
-        notiNumberInPlace[1] = notificationNumber;
-        notificationNumber++;
-        LeanTween.moveX(notification[1].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
-    }
-    private void EngineMalDismiss()
-    {
-        notificationNumber--;
-        RepositionNotifications(notiNumberInPlace[1]);
-        LeanTween.moveX(notification[1].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
-    }
+        if (!notiIsActive[notiIndex])
+        {
+            Debug.Log("activate " + notiNumberInPlace[notiIndex]);
+            notiIsActive[notiIndex] = true;
 
-    private void HeadlightNotification()
-    {
-        LeanTween.moveY(notification[2].GetComponent<RectTransform>(), (gapBetweenNotifications * notificationNumber), 0f);
-        notiNumberInPlace[2] = notificationNumber;
-        notificationNumber++;
-        LeanTween.moveX(notification[2].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
+            LeanTween.moveY(notification[notiIndex].GetComponent<RectTransform>(), (gapBetweenNotifications * notificationNumber), 0f);
+            LeanTween.moveX(notification[notiIndex].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
+
+            notiNumberInPlace[notiIndex] = notificationNumber;
+            notificationNumber++;
+
+        }
     }
-    private void HeadlightDismiss()
+    private void NotificationDismiss(int notiIndex)
     {
-        notificationNumber--;
-        RepositionNotifications(notiNumberInPlace[2]);
-        LeanTween.moveX(notification[2].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
-    }
-    private void LaneNotification()
-    {
-        LeanTween.moveY(notification[3].GetComponent<RectTransform>(), (gapBetweenNotifications * notificationNumber), 0f);
-        notiNumberInPlace[3] = notificationNumber;
-        notificationNumber++;
-        LeanTween.moveX(notification[3].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
-    }
-    private void LaneDismiss()
-    {
-        notificationNumber--;
-        RepositionNotifications(notiNumberInPlace[3]);
-        LeanTween.moveX(notification[3].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
-    }
-    private void RedLightNotification()
-    {
-        LeanTween.moveY(notification[4].GetComponent<RectTransform>(), (gapBetweenNotifications * notificationNumber), 0f);
-        notiNumberInPlace[4] = notificationNumber;
-        notificationNumber++;
-        LeanTween.moveX(notification[4].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
-    }
-    private void RedLightDismiss()
-    {
-        notificationNumber--;
-        RepositionNotifications(notiNumberInPlace[4]);
-        LeanTween.moveX(notification[4].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
-    }
-    private void SpeedLimitNotification()
-    {
-        LeanTween.moveY(notification[5].GetComponent<RectTransform>(), (gapBetweenNotifications * notificationNumber), 0f);
-        notiNumberInPlace[5] = notificationNumber;
-        notificationNumber++;
-        LeanTween.moveX(notification[5].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
-    }
-    private void SpeedLimitDismiss()
-    {
-        notificationNumber--;
-        RepositionNotifications(notiNumberInPlace[5]);
-        LeanTween.moveX(notification[5].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
-    }
-    private void TireLifeNotification()
-    {
-        LeanTween.moveY(notification[6].GetComponent<RectTransform>(), (gapBetweenNotifications * notificationNumber), 0f);
-        notiNumberInPlace[6] = notificationNumber;
-        notificationNumber++;
-        LeanTween.moveX(notification[6].GetComponent<RectTransform>(), showPosX, 0.4f).setEaseOutQuad();
-    }
-    private void TireLifeDismiss()
-    {
-        notificationNumber--;
-        RepositionNotifications(notiNumberInPlace[6]);
-        LeanTween.moveX(notification[6].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
+        if (notiIsActive[notiIndex])
+        {
+            Debug.Log("deactivate " + notiNumberInPlace[notiIndex]);
+            notiIsActive[notiIndex] = false;
+
+            RepositionNotifications(notiNumberInPlace[notiIndex]);
+            LeanTween.moveX(notification[notiIndex].GetComponent<RectTransform>(), dismissPosX, 0.4f).setEaseOutQuad();
+
+            notificationNumber--;
+
+        }
     }
 
     private void RepositionNotifications(int itself)
     {
-        for(int i = 0; i < notification.Length; i++)
+        for (int i = 0; i < notification.Length; i++)
         {
-            if(i != itself)
+            if (i != itself)
             {
-                notiNumberInPlace[i]--;
+
             }
             if (itself <= notiNumberInPlace[i])
             {
-                LeanTween.moveY(notification[i].GetComponent<RectTransform>(), (gapBetweenNotifications * notiNumberInPlace[i]), 0.5f);
-            }
+                notiNumberInPlace[i]--;
+                if (notiNumberInPlace[i] + 1 != itself)
+                {
+                    LeanTween.moveY(notification[i].GetComponent<RectTransform>(), (gapBetweenNotifications * notiNumberInPlace[i]), 0.5f);
+                }
 
+            }
         }
     }
+    #region NotificationsList
+    private void AccidentNotification()
+    {
+
+        NotificationActivate(0);
+    }
+    private void AccidentDismiss()
+    {
+        NotificationDismiss(0);
+
+    }
+    private void EngineMalfunctionNotification()
+    {
+        NotificationActivate(1);
+
+    }
+    private void EngineMalDismiss()
+    {
+        NotificationDismiss(1);
+
+    }
+
+    private void HeadlightNotification()
+    {
+        NotificationActivate(2);
+
+    }
+    private void HeadlightDismiss()
+    {
+        NotificationDismiss(2);
+
+    }
+    private void LaneNotification()
+    {
+        NotificationActivate(3);
+
+    }
+    private void LaneDismiss()
+    {
+        NotificationDismiss(3);
+
+    }
+    private void RedLightNotification()
+    {
+        NotificationActivate(4);
+
+    }
+    private void RedLightDismiss()
+    {
+        NotificationDismiss(4);
+
+    }
+    private void SpeedLimitNotification()
+    {
+        NotificationActivate(5);
+
+    }
+    private void SpeedLimitDismiss()
+    {
+        NotificationDismiss(5);
+
+    }
+    private void TireLifeNotification()
+    {
+        NotificationActivate(6);
+
+    }
+    private void TireLifeDismiss()
+    {
+        NotificationDismiss(6);
+
+    }
+    #endregion
 }
